@@ -1,0 +1,17 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block title %}Check out {{ device.name }}{% endblock %}
+
+{% block content %}
+    <h1>Check out {{ device.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="employee">Employee:</label>
+        <select name="employee_id" id="employee">
+            {% for employee in employees %}
+                <option value="{{ employee.id }}">{{ employee.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Check out</button>
+    </form>
+{% endblock %}

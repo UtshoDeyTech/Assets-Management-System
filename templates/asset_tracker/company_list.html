@@ -1,0 +1,14 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block title %}Companies{% endblock %}
+
+{% block content %}
+    <h1>Companies</h1>
+    <ul>
+        {% for company in companies %}
+            <li><a href="{% url 'asset_tracker:company_detail' company.id %}">{{ company.name }}</a></li>
+        {% empty %}
+            <li>No companies found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Asset Tracker{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'asset_tracker:home' %}">Home</a></li>
+          <li>
+            <a href="{% url 'asset_tracker:company_list' %}">Companies</a>
+          </li>
+          <li>
+            <a href="{% url 'asset_tracker:employee_list' %}">Employees</a>
+          </li>
+          <li><a href="{% url 'asset_tracker:device_list' %}">Devices</a></li>
+          <li><a href="{% url 'asset_tracker:logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'asset_tracker:login' %}">Login</a></li>
+          <li><a href="{% url 'asset_tracker:signup' %}">Sign up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %} {% endblock %}</main>
+  </body>
+</html>

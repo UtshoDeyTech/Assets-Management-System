@@ -1,0 +1,16 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block title %}{{ employee.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ employee.name }}</h1>
+    <p>Company: {{ employee.company.name }}</p>
+    <p>Devices checked out:</p>
+    <ul>
+        {% for device in employee.checked_out_devices.all %}
+            <li><a href="{% url 'asset_tracker:device_detail' device.id %}">{{ device.name }}</a> ({{ device.condition }})</li>
+        {% empty %}
+            <li>No devices checked out.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

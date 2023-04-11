@@ -1,0 +1,21 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block title %}{{ device.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ device.name }}</h1>
+    <p>Company: {{ device.company.name }}</p>
+    <p>Status: {{ device.status }}</p>
+    <p>Condition: {{ device.condition }}</p>
+    {% if device.checked_out_by %}
+        <p>Checked out by: <a href="{% url 'asset_tracker:employee_detail' device.checked_out_by.id %}">{{ device.checked_out_by.name }}</a></p>
+        <p>Checked out on: {{ device.checked_out_date }}</p>
+        <form method="POST" action="{% url 'asset_tracker:check_in_device' device.id %}">
+            {% csrf_token %}
+            <button type="submit">Check in</button>
+        </form>
+    {% else %}
+        <p>Available for check-out.</p>
+        <a href="{% url 'asset_tracker:check_out_device' device.id %}">Check out</a>
+    {% endif %}
+{% endblock %}

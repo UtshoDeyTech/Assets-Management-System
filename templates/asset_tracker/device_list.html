@@ -1,0 +1,15 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block title %}Devices{% endblock %}
+
+{% block content %}
+    <h1>Devices</h1>
+    <ul>
+        {% for device in devices %}
+            <li><a href="{% url 'asset_tracker:device_detail' device.id %}">{{ device.name }}</a> ({{ device.condition }}, {{ device.status }})</li>
+        {% empty %}
+            <li>No devices found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ company.name }}</h1>
+    <p>Employees:</p>
+    <ul>
+        {% for employee in company.employee_set.all %}
+            <li><a href="{% url 'asset_tracker:employee_detail' employee.id %}">{{ employee.name }}</a></li>
+        {% empty %}
+            <li>No employees found.</li>
+        {% endfor %}
+    </ul>
+    <p>Devices:</p>
+    <ul>
+        {% for device in company.device_set.all %}
+            <li><a href="{% url 'asset_tracker:device_detail' device.id %}">{{ device.name }}</a></li>
+        {% empty %}
+            <li>No devices found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'asset_tracker/base.html' %}
+
+{% block content %}
+    <h1>Employees</h1>
+    <a href="{% url 'asset_tracker:employee_create' %}" class="btn btn-primary mb-3">Add Employee</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.company.name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.phone }}</td>
+                    <td>
+                        <a href="{% url 'asset_tracker:employee_detail' employee.id %}" class="btn btn-secondary">View</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
